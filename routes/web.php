@@ -13,7 +13,7 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 $router->get('/', function() {
-    return response('GetBarcodes.xyz');
+    return response('GetBarcode.xyz');
 });
 
 $router->get('/barcode', 'BarcodeController@html');
