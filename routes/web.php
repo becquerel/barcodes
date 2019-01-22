@@ -11,6 +11,14 @@
 |
 */
 
+/** @var \Laravel\Lumen\Routing\Router $router */
+$router->get('/', function() {
+    return response('GetBarcodes.xyz');
+});
+
 $router->get('/barcode', 'BarcodeController@html');
 $router->get('/barcode/png', 'BarcodeController@png');
 $router->get('/barcode/jpg', 'BarcodeController@jpg');
+
+// Routes to make this compatible with previous system
+$router->get('/barcode/barcode_img.php', 'BarcodeController@png');
