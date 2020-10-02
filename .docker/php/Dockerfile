@@ -7,10 +7,17 @@ RUN apt-get update \
   libfreetype6-dev \
   libjpeg62-turbo-dev \
   libpng-dev \
+  git \
+  libzip4 \
+  libzip-dev \
+  unzip \
   && rm -rf /var/lib/apt/lists/*
 
-# GD
+# PHP extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
   && docker-php-ext-install -j "$(nproc)" gd
 
-RUN php -r 'var_dump(gd_info());'
+RUN docker-php-ext-configure zip && docker-php-ext-install -j "$(nproc)" zip
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
