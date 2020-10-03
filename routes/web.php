@@ -13,12 +13,10 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 $router->get('/', function() {
-    return response('GetBarcode.xyz');
+    return response('Bocian Barcode Generator');
 });
 
-$router->get('/barcode', 'BarcodeController@html');
-$router->get('/barcode/png', 'BarcodeController@png');
-$router->get('/barcode/jpg', 'BarcodeController@jpg');
 
-// Routes to make this compatible with previous system
-$router->get('/barcode/barcode_img.php', 'BarcodeController@png');
+$router->get('/{barcode}.jpg', 'BarcodeController@jpg');
+$router->get('/{barcode}.png', 'BarcodeController@png');
+$router->get('/{barcode}', 'BarcodeController@html');

@@ -9,23 +9,26 @@ use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class BarcodeController extends Controller
 {
-    public function html(BarcodeGeneratorHTML $generator, Request $request)
+    public function html($barcode, BarcodeGeneratorHTML $generator, Request $request)
     {
-        $code = $request->get('num', '00000000');
-        return response($generator->getBarcode($code, $generator::TYPE_CODE_39));
+        return response($generator->getBarcode($barcode, $generator::TYPE_CODE_39));
     }
 
-    public function png(BarcodeGeneratorPNG $generator, Request $request)
+    public function png($barcode, BarcodeGeneratorPNG $generator, Request $request)
     {
-        $code = $request->get('num', '00000000');
-        return response($generator->getBarcode($code, $generator::TYPE_CODE_39), 200, ['content-type' => 'image/png']);
+        return response(
+            $generator->getBarcode($barcode, $generator::TYPE_CODE_39),
+            200,
+            ['content-type' => 'image/png']
+        );
     }
 
-    public function jpg(BarcodeGeneratorJPG $generator, Request $request)
+    public function jpg($barcode, BarcodeGeneratorJPG $generator)
     {
-        $code = $request->get('num', '00000000');
-        return response($generator->getBarcode($code, $generator::TYPE_CODE_39), 200, ['content-type' => 'image/jpeg']);
+        return response(
+            $generator->getBarcode($barcode, $generator::TYPE_CODE_39),
+            200,
+            ['content-type' => 'image/jpeg']
+        );
     }
-
-    //
 }
